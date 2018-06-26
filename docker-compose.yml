@@ -1,0 +1,24 @@
+version: '2.4'
+services:
+  db:
+    build:
+      context: ./
+      dockerfile: Dockerfile.db
+    image: flowershop_db
+    container_name: db
+    user: postgres
+    environment:
+      - POSTGRES_USER = root
+      - POSTGRES_PASSWORD_FILE = root
+      - POSTGRES_DB = flowershop
+    ports:
+      - 5437:5432
+
+  app:
+    build: .
+    container_name: app
+    image: flowershop_app
+    ports:
+      - 8080:8080
+    depends_on:
+      - db
