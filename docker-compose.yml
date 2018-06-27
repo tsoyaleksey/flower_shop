@@ -1,24 +1,39 @@
 version: '2.4'
 services:
   db:
+    container_name: db
+    image: flowershop_db
     build:
       context: ./
       dockerfile: Dockerfile.db
-    image: flowershop_db
-    container_name: db
     user: postgres
     environment:
       - POSTGRES_USER = root
       - POSTGRES_PASSWORD_FILE = root
       - POSTGRES_DB = flowershop
     ports:
-      - 5437:5432
+      - 5434:5432
+    networks:
+      - back-tier
+    volumes:
+      - type= volume
+      - source= psql_data
+      - target= /var/lib/postgresql/data
 
   app:
-    build: .
     container_name: app
     image: flowershop_app
+    build: .
     ports:
       - 8080:8080
-    depends_on:
+    networks:
+      - back-tier
+    links:
       - db
+
+networks:
+  back-tier:
+
+volumes:
+  psql_data:
+
