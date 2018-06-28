@@ -1,33 +1,42 @@
-create table if not exists categories (
+create table if not exists flowers_types(
   id serial,
   name varchar(100) not null,
-  constraint pk_categories primary key (id)
+  constraint pk_type primary key (id)
 );
-create index if not exists idx_categories_id on categories(id);
-alter sequence categories_id_seq restart with 100;
+create index if not exists idx_type_name on flowers_types(name);
+alter sequence flowers_types_id_seq restart with 100;
 
-create table if not exists baskets (
+create table if not exists baskets(
   id serial,
   flowers_count int not null default 0,
   total_price double precision not null,
   constraint pk_baskets primary key (id)
 );
-create index if not exists idx_baskets_id on baskets(id);
 alter sequence baskets_id_seq restart with 100;
 
-create table if not exists flowers (
+create table if not exists colors(
+  id serial,
+  name varchar(100) not null,
+  constraint pk_colors primary key (id)
+);
+create index if not exists idx_colors_name on colors(name);
+alter sequence colors_id_seq restart with 100;
+
+create table if not exists flowers(
   id serial,
   name varchar(100) not null,
   price double precision not null,
   available int not null,
-  category_id int not null,
-  foreign key (category_id) references categories(id),
-  constraint pk_flower primary key (id)
+  color_id int not null,
+  type_id int not null,
+  foreign key (color_id) references colors(id),
+  foreign key (type_id) references flowers_types(id),
+  constraint pk_flowers primary key (id)
 );
-create index if not exists idx_flowers_id on flowers(id);
+create index if not exists idx_flowers_name on flowers(name);
 alter sequence flowers_id_seq restart with 100;
 
-create table if not exists flowers_in_baskets (
+create table if not exists flowers_in_baskets(
   basket_id int not null,
   flower_id int not null,
   added_flowers_count int not null,
@@ -35,3 +44,15 @@ create table if not exists flowers_in_baskets (
   foreign key (flower_id) references flowers(id),
   constraint unique_ids unique (basket_id, flower_id)
 );
+
+create table if not exists users(
+  id serial,
+  login varchar(255) not null,
+  password varchar(255) not null,
+  email varchar(100) not null,
+  basket_id int not null,
+  foreign key (basket_id) references baskets(id),
+  constraint pk_users primary key (id)
+);
+create index if not exists idx_users_login on users(login);
+alter sequence users_id_seq restart with 100;
