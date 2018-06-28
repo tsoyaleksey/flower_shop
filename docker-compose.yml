@@ -1,4 +1,4 @@
-version: '2.4'
+version: '2.2'
 services:
   db:
     container_name: db
@@ -15,10 +15,6 @@ services:
       - 5434:5432
     networks:
       - back-tier
-    volumes:
-      - type= volume
-      - source= psql_data
-      - target= /var/lib/postgresql/data
 
   app:
     container_name: app
@@ -33,7 +29,3 @@ services:
 
 networks:
   back-tier:
-
-volumes:
-  psql_data:
-
