@@ -39,7 +39,6 @@ alter sequence flowers_id_seq restart with 100;
 create table if not exists flowers_in_baskets(
   basket_id int not null,
   flower_id int not null,
-  added_flowers_count int not null,
   foreign key (basket_id) references baskets(id),
   foreign key (flower_id) references flowers(id),
   constraint unique_ids unique (basket_id, flower_id)
