@@ -9,7 +9,7 @@ alter sequence flowers_types_id_seq restart with 100;
 create table if not exists baskets(
   id serial,
   flowers_count int not null default 0,
-  total_price double precision not null,
+  total_price double precision not null default 0,
   constraint pk_baskets primary key (id)
 );
 alter sequence baskets_id_seq restart with 100;
@@ -40,8 +40,13 @@ create table if not exists flowers_in_baskets(
   basket_id int not null,
   flower_id int not null,
   foreign key (basket_id) references baskets(id),
-  foreign key (flower_id) references flowers(id),
-  constraint unique_ids unique (basket_id, flower_id)
+  foreign key (flower_id) references flowers(id)
+);
+
+create table if not exists roles(
+  id serial,
+  name varchar(100) not null,
+  constraint pk_roles primary key (id)
 );
 
 create table if not exists users(
@@ -49,9 +54,17 @@ create table if not exists users(
   login varchar(255) not null,
   password varchar(255) not null,
   email varchar(100) not null,
+  active boolean not null default true,
   basket_id int not null,
   foreign key (basket_id) references baskets(id),
   constraint pk_users primary key (id)
+);
+
+create table if not exists users_roles(
+  user_id int not null,
+  role_id int not null,
+  foreign key (user_id) references users(id),
+  foreign key (role_id) references roles(id)
 );
 create index if not exists idx_users_login on users(login);
 alter sequence users_id_seq restart with 100;

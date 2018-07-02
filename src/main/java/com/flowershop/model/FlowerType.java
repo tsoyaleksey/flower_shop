@@ -14,6 +14,6 @@ public class FlowerType extends BaseEntity {
     @Column(name = "name")
     private String name;
 
-    @OneToOne(mappedBy = "type", cascade = CascadeType.ALL, optional = false, fetch = FetchType.LAZY)
+    @OneToOne(mappedBy = "type", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Flower flower;
 }

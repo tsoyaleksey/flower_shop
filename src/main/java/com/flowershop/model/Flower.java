@@ -4,7 +4,6 @@ import lombok.Data;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
-import java.util.List;
 
 @Data
 @Entity
@@ -31,6 +30,4 @@ public class Flower extends BaseEntity {
     @JoinColumn(name = "type_id")
     private FlowerType type;
 
-//    @ManyToMany(mappedBy = "flowersInBasket")
-//    private List<Basket> baskets;
 }
