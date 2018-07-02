@@ -20,20 +20,15 @@ public class Basket extends BaseEntity {
     private double totalPrice;
 
     @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(name = "flowers_in_baskets", joinColumns = @JoinColumn(name = "flower_id"),
-                inverseJoinColumns = @JoinColumn(name = "basket_id"))
+    @JoinTable(name = "flowers_in_baskets", joinColumns = @JoinColumn(name = "basket_id"),
+                inverseJoinColumns = @JoinColumn(name = "flower_id"))
     private List<Flower> flowersInBasket;
-
-    @OneToOne(mappedBy = "basket", cascade = CascadeType.ALL,fetch = FetchType.LAZY, optional = false)
-    private User user;
 
     public void addFlower(Flower flower) {
         flowersInBasket.add(flower);
-        flower.getBaskets().add(this);
     }
 
     public void removeFlower(Flower flower) {
         flowersInBasket.remove(flower);
-        flower.getBaskets().remove(this);
     }
 }

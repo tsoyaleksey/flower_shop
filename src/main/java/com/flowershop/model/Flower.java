@@ -9,7 +9,7 @@ import java.util.List;
 @Data
 @Entity
 @Table(name = "flowers")
-public class Flower {
+public class Flower extends BaseEntity {
 
     @NotEmpty
     @Column(name = "name")
@@ -31,6 +31,6 @@ public class Flower {
     @JoinColumn(name = "type_id")
     private FlowerType type;
 
-    @ManyToMany(mappedBy = "flowersInBasket")
-    private List<Basket> baskets;
+//    @ManyToMany(mappedBy = "flowersInBasket")
+//    private List<Basket> baskets;
 }
