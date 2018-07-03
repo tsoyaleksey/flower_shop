@@ -1,4 +1,4 @@
-package com.flowershop.model;
+package com.flowershop.domain;
 
 import lombok.Data;
 
@@ -20,8 +20,9 @@ public class Basket extends BaseEntity {
     private double totalPrice;
 
     @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(name = "flowers_in_baskets", joinColumns = @JoinColumn(name = "basket_id"),
-                inverseJoinColumns = @JoinColumn(name = "flower_id"))
+    @JoinTable(name = "flowers_in_baskets",
+            joinColumns = @JoinColumn(name = "basket_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "flower_id", referencedColumnName = "id"))
     private List<Flower> flowersInBasket;
 
     public void addFlower(Flower flower) {

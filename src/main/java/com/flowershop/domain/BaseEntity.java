@@ -1,4 +1,4 @@
-package com.flowershop.model;
+package com.flowershop.domain;
 
 
 import lombok.Getter;

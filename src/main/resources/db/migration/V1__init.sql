@@ -45,7 +45,7 @@ create table if not exists flowers_in_baskets(
 
 create table if not exists roles(
   id serial,
-  name varchar(100) not null,
+  role varchar(100) not null,
   constraint pk_roles primary key (id)
 );
 
@@ -59,12 +59,12 @@ create table if not exists users(
   foreign key (basket_id) references baskets(id),
   constraint pk_users primary key (id)
 );
+create index if not exists idx_users_login on users(login);
+alter sequence users_id_seq restart with 100;
 
-create table if not exists users_roles(
+create table if not exists user_role(
   user_id int not null,
   role_id int not null,
   foreign key (user_id) references users(id),
   foreign key (role_id) references roles(id)
 );
-create index if not exists idx_users_login on users(login);
-alter sequence users_id_seq restart with 100;

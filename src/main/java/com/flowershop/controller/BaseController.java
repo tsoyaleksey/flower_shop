@@ -1,4 +1,4 @@
-package com.flowershop.rest;
+package com.flowershop.controller;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
