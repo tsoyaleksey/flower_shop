@@ -13,3 +13,21 @@ insert into flowers(id, name, price, available, color_id, type_id)
     (5, 'tulip', 3.50, 12, 2, 3),
     (6, 'tulip', 3.50, 20, 5, 3),
     (7, 'orchid', 7.50, 40, 1, 4);
+
+insert into baskets(id)
+  values
+    (1);
+
+insert into users(id, login, password, email, basket_id)
+  values
+    (1, 'admin', '$2a$11$6POF6si1xx1hbeD8p3unMu9mzXZDuCZlOBK5ykQcSQxKnxOdkBPYG', 'admin@flowershop.com', 1);
+
+insert into roles(id, role)
+  values
+    (1, 'ADMIN'),
+    (2, 'USER'),
+    (3, 'ANONYMOUS');
+
+insert into user_role(user_id, role_id)
+  values
+    (1,1);
