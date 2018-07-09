@@ -6,8 +6,8 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Set;
 
@@ -16,11 +16,11 @@ import java.util.Set;
 @Table(name = "users")
 public class User extends BaseEntity implements UserDetails {
 
-    @NotEmpty
+    @NotBlank(message = "Login cannot be empty")
     @Column(name = "login")
     private String username;
 
-    @NotEmpty
+    @NotBlank(message = "Password cannot be empty")
     @Column(name = "password")
     private String password;
 
@@ -43,7 +43,7 @@ public class User extends BaseEntity implements UserDetails {
     @JsonIgnore
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return new ArrayList<>();
+        return roles;
     }
 
     @JsonIgnore

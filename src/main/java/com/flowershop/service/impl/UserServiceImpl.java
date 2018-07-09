@@ -1,6 +1,7 @@
 package com.flowershop.service.impl;
 
 import com.flowershop.domain.Basket;
+import com.flowershop.domain.Flower;
 import com.flowershop.domain.User;
 import com.flowershop.repository.BasketRepository;
 import com.flowershop.repository.UserRepository;
@@ -10,6 +11,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -45,7 +47,14 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public List<Flower> getAllFlowersInBasket(Basket basket) {
+        return basketRepository.findAllByFlowersInBasket(basket);
+    }
+
+    @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        return null;
+        return Optional
+                .ofNullable(userRepository.findByUsername(username))
+                .orElseThrow(() -> new UsernameNotFoundException("User not found!"));
     }
 }
