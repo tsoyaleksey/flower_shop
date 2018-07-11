@@ -22,12 +22,5 @@ insert into users(id, login, password, email, basket_id)
   values
     (1, 'admin', '$2a$11$6POF6si1xx1hbeD8p3unMu9mzXZDuCZlOBK5ykQcSQxKnxOdkBPYG', 'admin@flowershop.com', 1);
 
-insert into roles(id, role)
-  values
-    (1, 'ADMIN'),
-    (2, 'USER'),
-    (3, 'ANONYMOUS');
-
-insert into user_role(user_id, role_id)
-  values
-    (1,1);
+insert into user_role(user_id, roles)
+  values (1, 'USER'), (1,'ADMIN');

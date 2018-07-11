@@ -43,12 +43,6 @@ create table if not exists flowers_in_baskets(
   foreign key (flower_id) references flowers(id)
 );
 
-create table if not exists roles(
-  id serial,
-  role varchar(100) not null,
-  constraint pk_roles primary key (id)
-);
-
 create table if not exists users(
   id serial,
   login varchar(255) not null,
@@ -64,7 +58,6 @@ alter sequence users_id_seq restart with 100;
 
 create table if not exists user_role(
   user_id int not null,
-  role_id int not null,
-  foreign key (user_id) references users(id),
-  foreign key (role_id) references roles(id)
+  roles varchar(255) not null,
+  foreign key (user_id) references users(id)
 );

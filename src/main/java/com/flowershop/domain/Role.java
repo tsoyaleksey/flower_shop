@@ -1,22 +1,13 @@
 package com.flowershop.domain;
 
-import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+public enum  Role implements GrantedAuthority {
 
-@Data
-@Entity
-@Table(name = "roles")
-public class Role extends BaseEntity implements GrantedAuthority {
-
-    @Column(name = "role")
-    private String role;
+    USER, ADMIN;
 
     @Override
     public String getAuthority() {
-        return getRole();
+        return name();
     }
 }
