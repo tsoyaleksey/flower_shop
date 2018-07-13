@@ -29,15 +29,17 @@ public class User extends BaseEntity implements UserDetails {
     @Column(name = "email")
     private String email;
 
+    @JsonIgnore
     @NotNull
     @Column(name = "active")
     private boolean isEnabled;
 
     @JsonIgnore
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "basket_id")
+    @JoinColumn(name = "basket_id", nullable = false, unique = true)
     private Basket basket;
 
+    @JsonIgnore
     @ElementCollection(targetClass = Role.class, fetch = FetchType.EAGER)
     @CollectionTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"))
     @Enumerated(EnumType.STRING)

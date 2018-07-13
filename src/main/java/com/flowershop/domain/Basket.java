@@ -3,7 +3,6 @@ package com.flowershop.domain;
 import lombok.Data;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotEmpty;
 import java.util.List;
 
 @Data
@@ -11,11 +10,9 @@ import java.util.List;
 @Table(name = "baskets")
 public class Basket extends BaseEntity {
 
-    @NotEmpty
     @Column(name = "flowers_count")
     private int flowersCount;
 
-    @NotEmpty
     @Column(name = "total_price")
     private double totalPrice;
 

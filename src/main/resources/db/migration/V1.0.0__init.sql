@@ -45,11 +45,11 @@ create table if not exists flowers_in_baskets(
 
 create table if not exists users(
   id serial,
-  login varchar(255) not null,
+  login varchar(255) not null unique,
   password varchar(255) not null,
   email varchar(100) not null,
   active boolean not null default true,
-  basket_id int not null,
+  basket_id int not null unique,
   foreign key (basket_id) references baskets(id),
   constraint pk_users primary key (id)
 );
